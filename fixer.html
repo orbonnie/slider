@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sliding Puzzle</title>
+        <link rel="stylesheet" href="fixer.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.js"
+                integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+                crossorigin="anonymous">
+        </script>
+        <script src="fixer.js"></script>
+    </head>
+    <body>
+        <div id="container">
+            <header id="title">
+                SLIDING PUZZLE
+            </header>
+            <p id="intro">
+                Click on a picture square to move it into empty space.
+                The square must be next to the empty space.
+            </p>
+            <div id="setUp">
+
+                <div id="board">
+                    <div class="rows" id="row1">
+                        <img class="pieces" src="https://tinyurl.com/ydex5sr4" alt="piece1">
+                        <img class="pieces" src="https://tinyurl.com/https-puzzlepics2" alt="piece2">
+                        <img class="pieces" src="https://tinyurl.com/https-puzzlepics3" alt="piece3">
+                    </div>
+                    <div class="rows" id="row2">
+                        <img class="pieces" src="https://tinyurl.com/https-puzzlepics4" alt="piece4">
+                        <img class="pieces" src="https://tinyurl.com/https-puzzlepics5" alt="piece5">
+                        <img class="pieces" src="https://tinyurl.com/https-puzzlepics6" alt="piece6">
+                    </div>
+                    <div class="rows" id="row3">
+                        <img class="pieces" src="https://tinyurl.com/https-puzzlepics7" alt="piece7">
+                        <img class="pieces" src="https://tinyurl.com/https-puzzlepics8" alt="piece8">
+                        <img class="pieces" src= "https://tinyurl.com/https-puzzlepics9" alt="piece9">
+                    </div>
+                </div>
+                <div id="buttons">
+                    <button id="undo">Undo</button>
+                    <button id="reset">Reset</button>
+                    <button id="play">Play Again</button>
+                </div>
+                <div id="original">
+                    <h3 id="origCaption">Original Picture</h3>
+                    <img id="bigPic" src="https://tinyurl.com/ydcm2otl" alt="big picture">
+                </div>
+
+            </div>
+        </div>
+
+        <script>
+            let setUp= $('#setUp');
+            let imgContainer = setUp.find('#board');
+            let image = imgContainer.find('.piece');
+
+            console.log(imgContainer.length);
+
+
+        </script>
+    </body>
+</html>
