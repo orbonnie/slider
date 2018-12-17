@@ -1,84 +1,92 @@
 #container {
-
+  font-family: 'Montserrat', sans-serif;
+  color: #103874;
 }
 
 #title {
-    text-align: center;
-    font-size: 4em;
-
+  text-align: center;
+  font-size: 4em;
+  padding: .3em;
 }
 
 #intro {
-    text-align: center;
-    font-size: 1.5em;
+  text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 2em;
+}
+
+hr {
+  width: 100%;
+  height: 0.5em;
+  background-color:#103874;
+  border: 0 none;
+
 }
 
 #setUp {
-    display: grid;
-    grid-template-columns: 2fr 1fr 2fr;
-    border: 1px solid darkslategrey;
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  justify-items: center;
+  padding: 10px;
+  /*   border: 1px solid #103874; */
 }
 
-#board {
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    grid-gap: 2px;
-    justify-content: center;
-    align-items: stretch;
-    height: 420px;
-    width: 420px;
-    border: 1px solid darkslategrey;
+#board{
+  width: 415px;
+  height: 415px;
+  position: relative;
+  background-color: lightgray;
+  border: 3px solid #103874;
 }
 
-.rows {
-
-}
-
-.pieces {
-    border: 1px solid darkslategrey;
+.square{
+  Display: inline-block;
+  margin: 2px;
+  background-color: lightgray;
+  text-align: center;
+  border: 1px solid tan;
+  position: absolute;
 }
 
 #buttons {
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    grid-auto-rows: 20px;
-    justify-items: center;
-    align-items: stretch;
-    margin-top: 90px;
-    margin-bottom: 60px;
-    border: 1px solid darkslategrey;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-auto-rows: 4em;
+  justify-items: center;
+  align-items: stretch;
+  margin-top: 3em;
+  margin-bottom: 2em;
+  width: 90%;
+  /*     border: 3px solid #103874; */
+}
 
-
+#moves {
+  font-size: 30px;
+  font-weight: bold;
+  justify-self: left;
+  margin: 1em;
 }
 
 button {
-    font-size: 20px;
-    border-radius: 9px;
-    height: 50px;
-    width: 100px;
-}
-
-#original {
-    border: 1px solid darkslategrey;
-
+  color: #103874;
+  font-size: 20px;
+  border-radius: 9px;
+  height: 2.5em;
+  margin: 1em;
+  width: 6em;
 }
 
 #origCaption {
-    margin: 5px auto 0 auto ;
-    font-size: 16px;
-    text-align: center;
-    text-decoration: underline;
+  margin: 5px auto 0 auto;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: underline;
 
 }
 
-#undo {
-
-}
-
-#redo {
-
-}
-
-#play {
-
+#original {
+  width: 415px;
+  height: 415px;
+  border: 3px solid #103874;
+  overflow: hidden;
 }
