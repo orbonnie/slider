@@ -162,7 +162,6 @@ $(document).ready(function(){
         left();
     }
     }
-}
 
   $('#shuffle').click(function(){
     $('#count').text('0');
