@@ -9,20 +9,20 @@ $(document).ready(function(){
   let gapY = 2;
   let gapX = 2;
 
-  let image1 = "https://tinyurl.com/ydex5sr4";
-  let image2 = "https://tinyurl.com/https-puzzlepics2";
-  let image3 = "https://tinyurl.com/https-puzzlepics3";
-  let image4 = "https://tinyurl.com/https-puzzlepics4";
-  let image5 = "https://tinyurl.com/https-puzzlepics5";
-  let image6 = "https://tinyurl.com/https-puzzlepics6";
-  let image7 = "https://tinyurl.com/https-puzzlepics7";
-  let image8 = "https://tinyurl.com/https-puzzlepics8";
-  let image9 = "https://tinyurl.com/https-puzzlepics9";
+  let image00 = "https://tinyurl.com/ydex5sr4";
+  let image01 = "https://tinyurl.com/https-puzzlepics2";
+  let image02 = "https://tinyurl.com/https-puzzlepics3";
+  let image10 = "https://tinyurl.com/https-puzzlepics4";
+  let image11 = "https://tinyurl.com/https-puzzlepics5";
+  let image12 = "https://tinyurl.com/https-puzzlepics6";
+  let image20 = "https://tinyurl.com/https-puzzlepics7";
+  let image21 = "https://tinyurl.com/https-puzzlepics8";
+  let image22 = "https://tinyurl.com/https-puzzlepics9";
 
   let images = [
-    [image1, image2, image3],
-    [image4, image5, image6],
-    [image7, image8, image9]
+    [image00, image01, image02],
+    [image10, image11, image12],
+    [image20, image21, image22]
   ];
 
   let squares = [
@@ -37,25 +37,25 @@ $(document).ready(function(){
         let value = y*3 + x+1;
         let image = images[y][x];
         if(value < 9) {
-          let piece = $('<img class="square" src=' + image + '>');
-          $('#board').append(piece);
-          piece.data("y", y).data("x", x);
-          squares[y][x] = piece;
+          let $piece = $('<img class="square" src=' + image + '>');
+          $piece.data('y', y).data('x', x);
+          squares[y][x] = $piece;
         }
       }
     }
     setBoard();
   }
 
-  function setBoard(){
+  function setBoard() {
     for(let y = 0; y < 3; y++) {
       for(let x = 0; x < 3; x++) {
-        let piece = squares[y][x];
-        if(piece){
-          piece.css({
-            top: piece.data('y') * squareHeight,
-            left: piece.data('x') * squareWidth
+        let $piece = squares[y][x];
+        if($piece){
+          $piece.css({
+            top: $piece.data('y') * squareHeight,
+            left: $piece.data('x') * squareWidth
           });
+          $('#board').append($piece);
         }
       }
     }
@@ -63,10 +63,10 @@ $(document).ready(function(){
 
   function down() {
     if(gapY > 0){
-      let piece = squares[gapY-1][gapX];
-      squares[gapY][gapX] = piece;
-      piece.data('y', gapY);
-      slide(piece);
+      let $piece = squares[gapY-1][gapX];
+      squares[gapY][gapX] = $piece;
+      $piece.data('y', gapY);
+      slide($piece);
       gapY -= 1;
       squares[gapY][gapX] = null;
     }
@@ -74,46 +74,46 @@ $(document).ready(function(){
 
   function up() {
     if(gapY < 2){
-      let piece = squares[gapY+1][gapX];
-      squares[gapY][gapX] = piece;
-      piece.data('y', gapY);
-      slide(piece);
+      let $piece = squares[gapY+1][gapX];
+      squares[gapY][gapX] = $piece;
+      $piece.data('y', gapY);
+      slide($piece);
       gapY += 1;
       squares[gapY][gapX] = null;
     }
   }
 
-  function left(){
+  function left() {
     if(gapX < 2){
-      let piece = squares[gapY][gapX+1];
-      squares[gapY][gapX] = piece;
-      piece.data('x', gapX);
-      slide(piece);
+      let $piece = squares[gapY][gapX+1];
+      squares[gapY][gapX] = $piece;
+      $piece.data('x', gapX);
+      slide($piece);
       gapX += 1;
       squares[gapY][gapX] = null;
     }
   }
 
-  function right(){
+  function right() {
     if(gapX > 0){
-      let piece = squares[gapY][gapX-1];
-      squares[gapY][gapX] = piece;
-      piece.data('x', gapX);
-      slide(piece);
+      let $piece = squares[gapY][gapX-1];
+      squares[gapY][gapX] = $piece;
+      $piece.data('x', gapX);
+      slide($piece);
       gapX -= 1;
       squares[gapY][gapX] = null;
     }
   }
 
-  function slide(piece){
-    piece.animate({
-      top: piece.data('y') * squareHeight,
-      left: piece.data('x') * squareWidth,
+  function slide($piece) {
+    $piece.animate({
+      top: $piece.data('y') * squareHeight,
+      left: $piece.data('x') * squareWidth,
       duration: 50
     });
   }
 
-  function keydown(e){
+  function keydown(e) {
     let count = parseInt($('span#count').text());
     switch (e.which){
       case 37:
@@ -141,12 +141,15 @@ $(document).ready(function(){
         }
       break;
     }
+    isSolved();
     e.stopPropagation();
     e.preventDefault();
     $('#count').text(count);
   }
 
-  function shuffle(){
+  function shuffle() {
+    $('#board').empty();
+    fillSquares();
     for(let i=0; i<80; i++){
       let random = Math.random();
       if(random < 0.25){
@@ -164,14 +167,40 @@ $(document).ready(function(){
     }
   }
 
-  $('#shuffle').click(function(){
+  function isSolved() {
+    let solved = true;
+    for(let y = 0; y < 3; y++) {
+      for(let x = 0; x < 3; x++) {
+        let $img = $(squares[y][x]);
+        if ($img[0]){
+          console.log($img[0].src, y, x);
+          // console.log($img, y, x);
+          if ($img[0].src !== images[y][x]) {
+            solved = false;
+          }
+        }
+      }
+    }
+    if (solved) {
+      let $piece = $('<img class="square" src=https://tinyurl.com/https-puzzlepics9>');
+      $piece.data('y', 2).data('x', 2);
+      $piece.css({
+        top: $piece.data('y') * squareHeight,
+        left: $piece.data('x') * squareWidth
+      });
+      $('#board').append($piece);
+      // squares[2][2] = $piece;
+    }
+  }
+
+  $('#shuffle').click(function() {
     $('#count').text('0');
     shuffle();
 });
 
-  $(function(e){
+  $(function(e) {
     $(document).keydown(keydown);
-    fillSquares();
+    // fillSquares();
     shuffle();
   });
 
