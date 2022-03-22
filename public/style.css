@@ -1,12 +1,12 @@
 #container {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: #103874;
 }
 
 #title {
   text-align: center;
   font-size: 4em;
-  padding: .3em;
+  padding: 0.3em;
 }
 
 #intro {
@@ -18,9 +18,8 @@
 hr {
   width: 100%;
   height: 0.5em;
-  background-color:#103874;
+  background-color: #103874;
   border: 0 none;
-
 }
 
 #setUp {
@@ -31,7 +30,7 @@ hr {
   /*   border: 1px solid #103874; */
 }
 
-#board{
+#board {
   width: 415px;
   height: 415px;
   position: relative;
@@ -39,8 +38,8 @@ hr {
   border: 3px solid #103874;
 }
 
-.square{
-  Display: inline-block;
+.square {
+  display: inline-block;
   margin: 2px;
   background-color: lightgray;
   text-align: center;
@@ -81,7 +80,6 @@ button {
   font-size: 18px;
   text-align: center;
   text-decoration: underline;
-
 }
 
 #original {

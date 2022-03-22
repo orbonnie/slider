@@ -1,4 +1,4 @@
-$(document).ready(function(){
+  $(document).ready(function(){
   const MARGIN = 2;
   const BORDER = 1;
   let boardWidth = $('#board').width();
