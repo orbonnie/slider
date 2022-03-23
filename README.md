@@ -1,6 +1,8 @@
+# launch
+
+npm start
+open localhost:8080
+
 # slider
+
 Use the arrow keys to move puzzle pieces until it looks like the picture on the right.
-
-I need to make the contents responsive when browser window is smaller
-
-I want to make the missing piece fill in when the puzzle is solved

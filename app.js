@@ -5,9 +5,8 @@
   let boardHeight = $('#board').height();
   let squareWidth = boardWidth/3;
   let squareHeight = boardWidth/3;
-
-  let gapY = 2;
-  let gapX = 2;
+  let freeze = false;
+  let images, squares, gapY, gapX;
 
   let image00 = "https://tinyurl.com/ydex5sr4";
   let image01 = "https://tinyurl.com/https-puzzlepics2";
@@ -19,17 +18,24 @@
   let image21 = "https://tinyurl.com/https-puzzlepics8";
   let image22 = "https://tinyurl.com/https-puzzlepics9";
 
-  let images = [
-    [image00, image01, image02],
-    [image10, image11, image12],
-    [image20, image21, image22]
-  ];
+  function start() {
+    gapY = 2;
+    gapX = 2;
 
-  let squares = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, null]
-  ];
+    images = [
+      [image00, image01, image02],
+      [image10, image11, image12],
+      [image20, image21, image22]
+    ];
+
+    squares = [
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, null]
+    ];
+  }
+
+  start();
 
   function fillSquares() {
     for(let y = 0; y < 3; y++) {
@@ -62,7 +68,7 @@
   }
 
   function down() {
-    if(gapY > 0){
+    if(gapY > 0 && !freeze){
       let $piece = squares[gapY-1][gapX];
       squares[gapY][gapX] = $piece;
       $piece.data('y', gapY);
@@ -73,7 +79,7 @@
   }
 
   function up() {
-    if(gapY < 2){
+    if(gapY < 2 && !freeze){
       let $piece = squares[gapY+1][gapX];
       squares[gapY][gapX] = $piece;
       $piece.data('y', gapY);
@@ -84,7 +90,7 @@
   }
 
   function left() {
-    if(gapX < 2){
+    if(gapX < 2 && !freeze){
       let $piece = squares[gapY][gapX+1];
       squares[gapY][gapX] = $piece;
       $piece.data('x', gapX);
@@ -95,7 +101,7 @@
   }
 
   function right() {
-    if(gapX > 0){
+    if(gapX > 0 && !freeze){
       let $piece = squares[gapY][gapX-1];
       squares[gapY][gapX] = $piece;
       $piece.data('x', gapX);
@@ -114,30 +120,31 @@
   }
 
   function keydown(e) {
+    console.log(gapX, gapY);
     let count = parseInt($('span#count').text());
     switch (e.which){
       case 37:
         if(gapX < 2){
           left();
-          count++;
+          if (!freeze) count++;
         }
       break;
       case 38:
         if(gapY < 2){
           up();
-          count++;
+          if (!freeze) count++;
         }
       break;
       case 39:
         if(gapX > 0){
           right();
-          count++;
+          if (!freeze) count++;
         }
       break;
       case 40:
         if(gapY > 0){
         down();
-        count++;
+        if (!freeze) count++;
         }
       break;
     }
@@ -173,8 +180,7 @@
       for(let x = 0; x < 3; x++) {
         let $img = $(squares[y][x]);
         if ($img[0]){
-          console.log($img[0].src, y, x);
-          // console.log($img, y, x);
+          // console.log($img[0].src, y, x);
           if ($img[0].src !== images[y][x]) {
             solved = false;
           }
@@ -182,21 +188,35 @@
       }
     }
     if (solved) {
-      let $piece = $('<img class="square" src=https://tinyurl.com/https-puzzlepics9>');
-      $piece.data('y', 2).data('x', 2);
-      $piece.css({
-        top: $piece.data('y') * squareHeight,
-        left: $piece.data('x') * squareWidth
-      });
-      $('#board').append($piece);
-      // squares[2][2] = $piece;
+      end();
     }
+  }
+
+  function end() {
+    let $piece = $('<img class="square" src=https://tinyurl.com/https-puzzlepics9>');
+    $piece.data('y', 2).data('x', 2);
+    $piece.css({
+      top: $piece.data('y') * squareHeight,
+      left: $piece.data('x') * squareWidth
+    });
+    $('#board').append($piece);
+    // squares[2][2] = $piece;
+    freeze = true;
   }
 
   $('#shuffle').click(function() {
     $('#count').text('0');
+    freeze = false;
+    start();
     shuffle();
 });
+
+  $('#reset').click(function() {
+    $('#count').text('0');
+    $('#board').empty();
+    start();
+    fillSquares();
+  });
 
   $(function(e) {
     $(document).keydown(keydown);
