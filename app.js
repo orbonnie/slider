@@ -1,4 +1,4 @@
-  $(document).ready(function(){
+ $(document).ready(function(){
   const MARGIN = 2;
   const BORDER = 1;
   let boardWidth = $('#board').width();
@@ -157,7 +157,7 @@
   function shuffle() {
     $('#board').empty();
     fillSquares();
-    for(let i=0; i<80; i++){
+    for(let i=0; i<60; i++){
       let random = Math.random();
       if(random < 0.25){
         up();

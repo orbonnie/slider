@@ -18,7 +18,6 @@
   "homepage": "https://github.com/orbonnie/slider#readme",
   "dependencies": {
     "express": "^4.17.3",
-    "jquery": "^3.6.0",
     "nodemon": "^2.0.15"
   }
 }
