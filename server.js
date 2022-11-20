@@ -10,6 +10,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => res.sendFile('/public/puzzle.html', { root : VIEWS }));
 app.get('/app.js', (req, res) => res.sendFile('/app.js', { root : VIEWS }));
+app.get('/app2.js', (req, res) => res.sendFile('/app2.js', { root : VIEWS }));
 app.get('/jquery.js', (req, res) => res.sendFile('/jquery.js', { root : VIEWS }));
 
 // app.get('/', (req, res) => {

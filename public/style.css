@@ -40,9 +40,9 @@ hr {
 
 .square {
   display: inline-block;
-  margin: 2px;
+  /* margin: 2px; */
   background-color: lightgray;
-  text-align: center;
+  align-content: center;
   border: 1px solid tan;
   position: absolute;
 }

@@ -18,6 +18,46 @@
   let image21 = "https://tinyurl.com/https-puzzlepics8";
   let image22 = "https://tinyurl.com/https-puzzlepics9";
 
+  function getImages() {
+    const aspect = '3:3';
+    const aspectW = parseInt(aspect.split(':')[0]);
+    const aspectH = parseInt(aspect.split(':')[1]);
+    const imgContainer = $('#board');
+    const img = $('#full');
+      let piece = $('<div></div>');
+    const path = img.attr("src");
+    const pieceW = Math.floor(img.width() / aspectW);
+    const pieceH = Math.floor(img.width() / aspectH);
+    const positions = [];
+
+    for (var r = 0; r < aspectH; r++) {
+      let row = [];
+      for (var c = 0; c < aspectW; c++) {
+        var top = pieceH * r,
+            left = pieceW * c;
+        let square = piece.clone()
+          .attr('id', r+c)
+          .css({
+            width: pieceW,
+            height: pieceH,
+            position: 'absolute',
+            top: top,
+            left: left,
+            backgroundImage: ['url(', path, ')'].join(''),
+            backgroundPosition: [
+              '-', pieceW * c, 'px ',
+              '-', pieceH * r, 'px'
+            ].join('')
+          }).addClass('piece');
+        square.appendTo(imgContainer);
+        row.push(square);
+      }
+      positions.push(row);
+    }
+    return positions;
+  }
+
+
   function start() {
     gapY = 2;
     gapX = 2;
@@ -36,6 +76,7 @@
   }
 
   start();
+  // console.log(squares);
 
   function fillSquares() {
     for(let y = 0; y < 3; y++) {
@@ -115,12 +156,12 @@
     $piece.animate({
       top: $piece.data('y') * squareHeight,
       left: $piece.data('x') * squareWidth,
-      duration: 50
+      duration: 1
     });
   }
 
   function keydown(e) {
-    console.log(gapX, gapY);
+    // console.log(gapX, gapY);
     let count = parseInt($('span#count').text());
     switch (e.which){
       case 37:
@@ -157,7 +198,7 @@
   function shuffle() {
     $('#board').empty();
     fillSquares();
-    for(let i=0; i<60; i++){
+    for(let i=0; i<95; i++){
       let random = Math.random();
       if(random < 0.25){
         up();
@@ -193,14 +234,13 @@
   }
 
   function end() {
-    let $piece = $('<img class="square" src=https://tinyurl.com/https-puzzlepics9>');
+    let $piece = $('<img class="square" src=' + images[2][2] + '>');
     $piece.data('y', 2).data('x', 2);
     $piece.css({
       top: $piece.data('y') * squareHeight,
       left: $piece.data('x') * squareWidth
     });
     $('#board').append($piece);
-    // squares[2][2] = $piece;
     freeze = true;
   }
 
@@ -209,9 +249,9 @@
     freeze = false;
     start();
     shuffle();
-});
+  });
 
-  $('#reset').click(function() {
+  $('#solve').click(function() {
     $('#count').text('0');
     $('#board').empty();
     start();
@@ -220,7 +260,6 @@
 
   $(function(e) {
     $(document).keydown(keydown);
-    // fillSquares();
     shuffle();
   });
 
