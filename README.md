@@ -1,8 +1,8 @@
 # launch
 
-npm install
-npm start
-open localhost:8080
+npm install\
+npm start\
+open localhost:8080\
 
 # slider
 
