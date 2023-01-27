@@ -2,7 +2,7 @@
 
 npm install\
 npm start\
-open localhost:8080\
+open localhost:8080
 
 # slider
 
